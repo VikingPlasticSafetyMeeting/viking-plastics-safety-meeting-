@@ -7,13 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #004A8F; /* Original Viking Plastics blue */
+            --primary-blue: #004A8F;
             --light-gray: #f4f4f4;
             --dark-text: #333;
-            --header-bg: #004d40; /* Professional Green from green.PNG */
+            --header-bg: #004d40;
             --header-text: #ffffff;
             --border-color: #ddd;
-            --button-color: #004A8F; /* Use Viking Plastics blue for general buttons */
+            --button-color: #004A8F;
             --button-hover: #003a70;
             --section-padding: 30px 20px;
         }
@@ -25,6 +25,7 @@
             background-color: var(--light-gray);
             color: var(--dark-text);
             line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
         }
 
         header {
@@ -33,27 +34,30 @@
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
+            position: relative;
         }
 
         header .logo {
             height: 50px;
-            margin-right: 15px; /* Reduced from 20px to move title left */
+            margin-right: 20px;
             filter: invert(1) grayscale(1) brightness(2);
+            position: absolute;
+            left: 20px;
         }
 
         header h1 {
             margin: 0;
             font-size: 2.3em;
             font-weight: 700;
-            flex-grow: 1;
             text-align: center;
             white-space: nowrap;
-            margin-left: -15px; /* Added negative margin to shift title left */
+            flex: 1;
+            padding: 0 60px; /* Added padding to center properly */
         }
 
         .container {
@@ -67,7 +71,14 @@
             padding: var(--section-padding);
             margin-bottom: 20px;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);
         }
 
         h2 {
@@ -98,12 +109,21 @@
         input[type="date"],
         textarea.input-field {
             width: calc(100% - 22px);
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 1em;
             box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea.input-field:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 74, 143, 0.2);
         }
 
         textarea {
@@ -119,12 +139,18 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             margin-right: 10px;
+            font-weight: 500;
         }
 
         button:hover {
             background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
 
         .input-controls {
@@ -147,6 +173,7 @@
             flex-grow: 1;
             flex-wrap: wrap;
         }
+        
         .input-controls .split-inputs input {
             flex-grow: 1;
             flex-basis: 0;
@@ -162,13 +189,15 @@
 
         table th, table td {
             border: 1px solid var(--border-color);
-            padding: 10px;
+            padding: 12px;
             text-align: left;
         }
 
         table th {
             background-color: #e9e9e9;
             font-weight: 700;
+            position: sticky;
+            top: 0;
         }
 
         .action-buttons {
@@ -194,6 +223,7 @@
             border: 1px solid var(--border-color);
             border-radius: 5px;
             padding: 5px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .data-table-container table {
@@ -221,7 +251,7 @@
         .remove-btn {
             background-color: #dc3545;
             color: white;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 3px;
             cursor: pointer;
             font-size: 0.85em;
@@ -277,6 +307,10 @@
             text-align: center;
             margin-top: 30px;
             margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
         .save-meeting-btn {
@@ -294,10 +328,12 @@
             align-items: center;
             justify-content: center;
             vertical-align: middle;
+            box-shadow: 0 4px 6px rgba(0, 77, 64, 0.3);
         }
 
         .save-meeting-btn:hover {
             background-color: #003d33;
+            box-shadow: 0 6px 8px rgba(0, 77, 64, 0.4);
         }
 
         .save-meeting-btn .button-default-text {
@@ -313,6 +349,7 @@
             position: absolute;
         }
 
+        /* Fixed animation size */
         .save-meeting-btn .viking-animated-text {
             position: absolute;
             top: 50%;
@@ -320,7 +357,7 @@
             transform: translate(-50%, -50%) scale(0.8);
             opacity: 0;
             color: #ffffff;
-            font-size: 1.8em;
+            font-size: 1.4em; /* Adjusted size */
             font-weight: 900;
             white-space: nowrap;
             pointer-events: none;
@@ -339,15 +376,15 @@
                 opacity: 0;
             }
             15% {
-                transform: translate(-50%, -50%) scale(1.3);
+                transform: translate(-50%, -50%) scale(1.1);
                 opacity: 1;
             }
             70% {
-                transform: translate(-50%, -50%) scale(1.1);
+                transform: translate(-50%, -50%) scale(1.0);
                 opacity: 1;
             }
             100% {
-                transform: translate(-50%, -50%) scale(1.1);
+                transform: translate(-50%, -50%) scale(1.0);
                 opacity: 0;
             }
         }
@@ -390,6 +427,65 @@
             }
         }
 
+        /* Date buttons container */
+        .date-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* Clear date button style */
+        .clear-date-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .clear-date-btn:hover {
+            background-color: #c82333;
+        }
+        
+        /* Export buttons */
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .export-btn {
+            background-color: #28a745;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .export-btn:hover {
+            background-color: #218838;
+        }
+        
+        .export-btn i {
+            font-style: normal;
+            font-size: 1.2em;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             header {
@@ -399,6 +495,8 @@
                 padding: 10px;
             }
             header .logo {
+                position: relative;
+                left: auto;
                 margin-right: 0;
                 margin-bottom: 5px;
             }
@@ -406,8 +504,7 @@
                 font-size: 1.8em;
                 margin-top: 5px;
                 text-align: center;
-                flex-grow: unset;
-                margin-left: 0;
+                padding: 0;
             }
             .container {
                 margin: 10px auto;
@@ -454,7 +551,15 @@
             }
 
             .save-meeting-btn .viking-animated-text {
-                font-size: 1.2em;
+                font-size: 1.1em;
+            }
+            
+            .date-controls {
+                flex-direction: column;
+            }
+            
+            .export-buttons {
+                flex-direction: column;
             }
         }
     </style>
@@ -462,7 +567,7 @@
 <body>
     <header>
         <img src="vikinglogo.png" alt="Viking Plastics Logo" class="logo">
-        <h1 style="color: var(--header-text);">Viking Plastics Training Meeting</h1>
+        <h1>Viking Plastics Safety Meeting</h1>
     </header>
 
     <div class="container">
@@ -706,10 +811,12 @@
             <p>Enter the date of the next scheduled safety meeting.</p>
             <div class="input-controls">
                  <input type="date" id="nextMeetingDate" class="input-field">
-                 <button id="saveNextMeetingDateBtn" onclick="saveDate('nextMeetingDate', this)">Save Date</button>
             </div>
-            <p id="displayNextMeetingDate" style="margin-top: 5px; font-weight: bold;">
-                </p>
+            <div id="dateDisplay" style="margin-top: 10px; padding: 10px; background-color: #f8f9fa; border-radius: 4px; font-weight: bold; text-align: center; min-height: 24px;"></div>
+            <div class="date-controls">
+                <button id="saveNextMeetingDateBtn" onclick="saveDate()">Save Date</button>
+                <button id="clearNextMeetingDateBtn" class="clear-date-btn" onclick="clearDate()" style="display: none;">Clear Date</button>
+            </div>
         </section>
 
         <div class="save-meeting-btn-container">
@@ -717,9 +824,24 @@
                 <span class="button-default-text">Save All Meeting Data</span>
                 <span class="viking-animated-text">Viking Plastics</span>
             </button>
+            
+            <div class="export-buttons">
+                <button class="export-btn" onclick="exportAsText()">
+                    <i>📄</i> Export as Text File
+                </button>
+                <button class="export-btn" onclick="exportAsPDF()">
+                    <i>📊</i> Export as PDF
+                </button>
+            </div>
+            
             <p style="margin-top: 10px; font-size: 0.9em; color: #666;">(This ensures all tables and the next meeting date are saved to your browser.)</p>
         </div>
     </div>
+
+    <footer>
+        <p>Viking Plastics Safety Meeting System | Designed for the Kentucky Plant</p>
+        <p>© 2023 Viking Plastics. All rights reserved.</p>
+    </footer>
 
     <script>
         // Function to load data from localStorage
@@ -749,7 +871,7 @@
 
             // Reset animation
             animatedText.classList.remove('animate');
-            void animatedText.offsetWidth;
+            void animatedText.offsetWidth; // Trigger reflow
             animatedText.classList.add('animate');
 
             // After animation, revert button state
@@ -761,6 +883,7 @@
 
         // --- VP Saving Animation for Individual Buttons ---
         function triggerVpSaveAnimation(buttonElement) {
+            // Prevent multiple animations if clicked rapidly
             if (buttonElement.querySelector('.vp-saving-animation')) {
                 return;
             }
@@ -770,9 +893,11 @@
             vpAnimation.className = 'vp-saving-animation';
             buttonElement.appendChild(vpAnimation);
 
+            // Trigger reflow to restart animation
             void vpAnimation.offsetWidth;
             vpAnimation.classList.add('animate');
 
+            // Remove the animation element after it completes
             vpAnimation.addEventListener('animationend', () => {
                 vpAnimation.remove();
             }, { once: true });
@@ -790,8 +915,9 @@
             renderTable(tableBody.id, newData, storageKey);
         }
 
-        // Function to clear all rows from a table and localStorage - NO MORE CONFIRMATION
+        // Function to clear all rows from a table and localStorage
         function clearTable(tableBodyId, buttonElement) {
+            // Trigger clear button animation
             if (buttonElement) {
                 buttonElement.classList.remove('clear-pulsing');
                 void buttonElement.offsetWidth;
@@ -854,12 +980,13 @@
                 }
             }
             saveData(storageKey, dataToSave);
+            // Trigger the "VP" animation on the clicked button
             if (buttonElement) {
                 triggerVpSaveAnimation(buttonElement);
             }
         }
 
-        // Generic function to add an entry to any specified table (for single-content items)
+        // Generic function to add an entry to any specified table
         function addEntry(inputId, tableBodyId, storageKey) {
             const inputElement = document.getElementById(inputId);
             const content = inputElement.value.trim();
@@ -892,19 +1019,39 @@
             }
         }
 
-        // Function to save the next meeting date - Now triggers VP animation
-        function saveDate(elementId, buttonElement) {
-            const dateInput = document.getElementById(elementId);
+        // Function to save the next meeting date
+        function saveDate() {
+            const dateInput = document.getElementById('nextMeetingDate');
             const dateValue = dateInput.value;
+            
             if (dateValue) {
-                localStorage.setItem(elementId, dateValue);
-                document.getElementById('displayNextMeetingDate').textContent = `Next Meeting: ${new Date(dateValue).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
-                if (buttonElement) {
-                    triggerVpSaveAnimation(buttonElement);
-                }
+                localStorage.setItem('nextMeetingDate', dateValue);
+                
+                // Format date correctly without timezone issues
+                const dateObj = new Date(dateValue);
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = dateObj.toLocaleDateString('en-US', options);
+                
+                document.getElementById('dateDisplay').innerHTML = `<strong>Next Meeting:</strong> ${formattedDate}`;
+                
+                // Show Clear button, hide Save button
+                document.getElementById('clearNextMeetingDateBtn').style.display = 'inline-block';
+                document.getElementById('saveNextMeetingDateBtn').style.display = 'none';
+                
+                // Trigger animation on save button
+                triggerVpSaveAnimation(document.getElementById('saveNextMeetingDateBtn'));
             } else {
                 alert('Please select a date.');
             }
+        }
+
+        // Function to clear the saved date
+        function clearDate() {
+            localStorage.removeItem('nextMeetingDate');
+            document.getElementById('nextMeetingDate').value = '';
+            document.getElementById('dateDisplay').textContent = '';
+            document.getElementById('clearNextMeetingDateBtn').style.display = 'none';
+            document.getElementById('saveNextMeetingDateBtn').style.display = 'inline-block';
         }
 
         // Function to render the table from stored data
@@ -952,10 +1099,104 @@
             });
         }
 
-        // Function to save all relevant meeting data (all tables and next meeting date)
+        // Function to gather all meeting data
+        function gatherMeetingData() {
+            const data = {
+                meetingDate: localStorage.getItem('nextMeetingDate') || '',
+                membersPresent: loadData('membersPresent'),
+                oldActionItems: loadData('oldActionItems'),
+                newActionItems: loadData('newActionItems'),
+                completedActions: loadData('completedActions'),
+                incidents: loadData('incidents'),
+                safetyIdeas: loadData('safetyIdeas'),
+                strengths: loadData('strengths'),
+                challenges: loadData('challenges')
+            };
+            
+            return data;
+        }
+        
+        // Function to format meeting data as text
+        function formatMeetingDataAsText(data) {
+            let text = "VIKING PLASTICS SAFETY MEETING REPORT\n";
+            text += "======================================\n\n";
+            
+            // Format date
+            if (data.meetingDate) {
+                const dateObj = new Date(data.meetingDate);
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = dateObj.toLocaleDateString('en-US', options);
+                text += `Next Meeting Date: ${formattedDate}\n\n`;
+            }
+            
+            // Format each section
+            const sections = [
+                { title: "MEMBERS PRESENT", data: data.membersPresent, type: "members" },
+                { title: "OLD ACTION ITEMS", data: data.oldActionItems, type: "items" },
+                { title: "NEW ACTION ITEMS", data: data.newActionItems, type: "items" },
+                { title: "COMPLETED ACTIONS", data: data.completedActions, type: "items" },
+                { title: "INCIDENTS/ACCIDENTS", data: data.incidents, type: "items" },
+                { title: "SAFETY IDEAS/SUGGESTIONS", data: data.safetyIdeas, type: "items" },
+                { title: "KEY STRENGTHS", data: data.strengths, type: "items" },
+                { title: "KEY CHALLENGES", data: data.challenges, type: "items" }
+            ];
+            
+            sections.forEach(section => {
+                if (section.data.length > 0) {
+                    text += `\n${section.title}\n`;
+                    text += `${'-'.repeat(section.title.length)}\n`;
+                    
+                    if (section.type === "members") {
+                        section.data.forEach((item, index) => {
+                            text += `${index + 1}. ${item.name} (${item.role}) - Added: ${item.date}\n`;
+                        });
+                    } else {
+                        section.data.forEach((item, index) => {
+                            text += `${index + 1}. ${item.content} - Added: ${item.date}\n`;
+                        });
+                    }
+                    
+                    text += "\n";
+                }
+            });
+            
+            return text;
+        }
+        
+        // Function to export as text file
+        function exportAsText() {
+            const meetingData = gatherMeetingData();
+            const textContent = formatMeetingDataAsText(meetingData);
+            
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            const date = new Date();
+            const fileName = `viking_safety_meeting_${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}.txt`;
+            
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 100);
+        }
+        
+        // Function to export as PDF
+        function exportAsPDF() {
+            alert("PDF export functionality would require a server-side component or specialized library. For now, please use the 'Export as Text File' option.");
+        }
+
+        // Function to save all relevant meeting data
         function saveAllMeetingData() {
             triggerButtonVikingAnimation();
 
+            // Execute all save operations after a short delay
             setTimeout(() => {
                 saveTable('membersPresent');
                 saveTable('oldActionItems');
@@ -969,10 +1210,16 @@
                 const nextMeetingDateInput = document.getElementById('nextMeetingDate');
                 if (nextMeetingDateInput.value) {
                     localStorage.setItem('nextMeetingDate', nextMeetingDateInput.value);
-                    document.getElementById('displayNextMeetingDate').textContent = `Next Meeting: ${new Date(nextMeetingDateInput.value).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+                    
+                    // Format date correctly
+                    const dateObj = new Date(nextMeetingDateInput.value);
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = dateObj.toLocaleDateString('en-US', options);
+                    
+                    document.getElementById('dateDisplay').innerHTML = `<strong>Next Meeting:</strong> ${formattedDate}`;
                 }
 
-                alert('All available meeting data saved to your browser!');
+                alert('All meeting data has been saved to your browser!');
             }, 1800);
         }
 
@@ -987,10 +1234,35 @@
             renderTable('strengthTableBody', loadData('strengths'), 'strengths');
             renderTable('challengeTableBody', loadData('challenges'), 'challenges');
 
+            // Date initialization and event listeners
+            const dateInput = document.getElementById('nextMeetingDate');
+            const dateDisplay = document.getElementById('dateDisplay');
+            const saveDateBtn = document.getElementById('saveNextMeetingDateBtn');
+            const clearDateBtn = document.getElementById('clearNextMeetingDateBtn');
+            
+            // Show selected date in real-time
+            dateInput.addEventListener('change', function() {
+                if (this.value) {
+                    const dateObj = new Date(this.value);
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = dateObj.toLocaleDateString('en-US', options);
+                    dateDisplay.innerHTML = `<strong>Selected Date:</strong> ${formattedDate}`;
+                    
+                    // Show Save button if date is selected
+                    saveDateBtn.style.display = 'inline-block';
+                }
+            });
+            
+            // Load saved date if exists
             const savedDate = localStorage.getItem('nextMeetingDate');
             if (savedDate) {
-                document.getElementById('nextMeetingDate').value = savedDate;
-                document.getElementById('displayNextMeetingDate').textContent = `Next Meeting: ${new Date(savedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+                dateInput.value = savedDate;
+                const dateObj = new Date(savedDate);
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = dateObj.toLocaleDateString('en-US', options);
+                dateDisplay.innerHTML = `<strong>Next Meeting:</strong> ${formattedDate}`;
+                clearDateBtn.style.display = 'inline-block';
+                saveDateBtn.style.display = 'none';
             }
         };
     </script>
